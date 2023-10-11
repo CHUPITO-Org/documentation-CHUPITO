@@ -1,0 +1,14 @@
+.bullet {
+  margin: 10px 1px 10px 0px;
+}
+
+.bullet > span:first-child {
+    width: 20px;
+    line-height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+    margin: 6px;
+    background-color: var(--ifm-color-content);
+    color: var(--ifm-color-content-inverse);
+}
