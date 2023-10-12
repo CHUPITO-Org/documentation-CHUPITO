@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Developer Portal',
-  tagline: 'Documentación de arquitectura y catálogo de APIs',
+  title: 'Chupito Event app',
+  tagline: 'Documentación de flujo y catálogo de APIs',
   url: 'https://client-url.com/',
   baseUrl: '/documentation',
   onBrokenLinks: 'throw', // WARNING: Please don't change/remove it. It could throw consistency/deployment issues 

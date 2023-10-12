@@ -12,7 +12,7 @@ sidebar_position: 1
 Instalar paquetes : yarn
 
 Agregar file .env
-
+```
 REACT_APP_BASE_PATH=http://localhost:5002/v1/
 REACT_APP_VERSION=1.2.6
 REACT_APP_API_KEY=AIzaSyArsC-1LYGtJQ4pdImCbH5mirFd5VmXaPU
@@ -24,10 +24,52 @@ REACT_APP_MESSAGING_SENDER_ID=59947976000
 TEST_USER_EMAIL=testuser@chupito.com
 TEST_USER_PWD=TesT#975
 TEST_USER_ID=sRrmUhxMgrhA1WeMyQp9CzzxyO92
-
+```
 Usar version node v14
 
 
 
-### Backend-
+### Backend-chlorine
 
+docker-compose up -d
+yarn install
+
+Agregar file .env
+```
+PRIVATE_KEY_ID=db7e1f20c83c09eee42aa4c81bf7d002e6b8aa87
+PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkHJyFx/d8dIBn\nmy/J8ff/gEGbog855UiunbFo4nb7ckT03WJKMPelfgQQDFaDyBf7MH4qfyVwLRe8\nsj+e9XymGWucR65ALxW8toawd9o7um8eJZLcC2FoDv937yzzreox76S7B1bTRlen\noub7/Z/nV9pWSWR9baahCrDfb6kDa4bUEHV0eImdfF6rhUq/Vq65O6n0ERNj3uIw\nCdOo+xXsuoTuZVx8IoVHC1i20qNuQREzhtij502hHYhTzMqxfDBIR5P/KD8nKBNW\nctGdzHEG8JHcc71C2f6k5Y5u/XP9ZlYtH2zLjtHU5MFOQazDqhkJbdFnyQMQBYma\nHz8MufTHAgMBAAECggEAQGtgv5zyl35txv2iQS3D0R4J4us2+d14bd7FvKuk0+gT\njGD4i7H0DBjOxHPrY/hf/YCYDdtyGToCJtZ7ZczsPJEe7i4vBs/UwwqNDWlGl4qD\nwrwyDUFEX6H/gxc2OIMsuqRcr/PeD7n9f3bRH9p7ccbJFHTjxt6LeYymSFbe69Gg\nvW1yyFxCelQQDW1NQ7x2TtKsLycFgjJKmpsdFsIpRoemZi+H1LwbxMo9lE82L76n\nguaYoQaEGPFN+3q7dqohwlVGw0nubPt8ZhZuptIOnck7yH+A3uUBV2F482oxO9o5\nJio0b9PEjV5GvYjzr23NGHitZQd3bdAlzWOCaJlvZQKBgQDcBSz1br+7cx4hQTVJ\nU+OBHbnda334LAq83SQLLJEBioo9P9zqtgogLcsa1AUDEFhbpu5GGj+hpCJjj3sk\nFQLCbEgNuRJec6cug5FaSHDMY2pj+pP45JSS2LVb1+p/bRRs07PrpvX+2sDU2qxz\nUT9LdO/zL7mAMuprangGlbReAwKBgQC+8ukCzuAW4M7vAn93SVmNp1vvPDEo7b5v\nKbFCObgFrcD/C2S5cJhVKvGxcGBTyaW+sZ5QYDd3NlxXxiNMcwL7BxTiQxzzb2nF\n+/S/zPbsKikdYYKwjm+xBj2UJeMyrcVhZFU5AZtA4IH4tAzJO7XlCY4YRv0ht5bO\nLtgT/Nek7QKBgDMQGHEVtPXiL7n0ElPkXkaXCY3z5pZ0UkGm6TiWrUi4SIESk0j9\n2rfBKQQe9NLTNk5/HYmzidUP7NNCd4fWQH+y9b4Jl9PH76MB8fgMG/GzmPt/Klx3\nYGv8U4rvP4M3Y6gmMfmdFDaDuoEsBx30W0Y963p7NwgjyPgJC7YrhGLVAoGAc8No\nqJ8rFDOuwRBOns8FT+/KuLtRQnMAJPytzmyXuDmi6/zIT/SHJfsnFGAAxktWBMpC\nJJBwkAGQ8lXZSJvhjra4XoQ5pQxCoBkkRLPKb1sQGhPn24o/BJ+37X0axLq9E1J0\nqF7k9OwnX9QofEeK+xRT5TwEctCOyOl1boi3Y/ECgYEAimr8FpKx4e671oBh2MOt\no8S1rBMvkkhQwmND0/cZajo38oIIQgzMNDQJmJU+IcKz6GUfK93VYZGRYwShOQBI\nqBwqCeKIgCLrdg1Cc/Ncd9zQtBuZ7IiV0ys+5s/auBUcsz3cX186pILtKK71aEzF\nqCMBWZhCByWZxb0aRHUjSdU=\n-----END PRIVATE KEY-----\n
+CLIENT_EMAIL=firebase-adminsdk-zlfu9@spider-node-app.iam.gserviceaccount.com
+CLIENT_ID=107863048168589180246
+CLIENT_CERT_URL=https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-zlfu9%40spider-node-app.iam.gserviceaccount.com
+PROJECT_ID=spider-node-app
+AUTH_URI=https://accounts.google.com/o/oauth2/auth
+TOKEN_URI=https://oauth2.googleapis.com/token
+AUTH_PROVIDER_CERT_URL=https://www.googleapis.com/oauth2/v1/certs
+DATABASE_URL=https://spidernode-app.firebaseio.com
+STORAGE_BUCKET=spider-node-app.appspot.com
+MONGODB_URI='mongodb://mongoDev:Passw0rd@localhost:27017/?authSource=admin'
+DB='mongodb'
+AUTH_PRIVATE_KEY_ID=b2805593a7e165005c53f699b0e0cd5b900eec91
+AUTH_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCtxHZ0IW+Q28H8\nmJA9cf9FQSFtedfCQR6YMjK3XvJyRUiSO32p4UK3Xq5O64EMmycKQX5xoR8f9HyY\n1EsyBuL5wC34x5Hi6aUKU0s6mx5PFS2LNY0jAPKz2wCmSUlDl0jIY8tXbY/ZyJbo\n8erVv1e2MAwYvm3yYIrMVYa+dujySL2h/A8rPGaSsByEgCHHNALYH+fOmMiwP7cz\nb7ECUK5kD1RZbqvjRcnGsZy8Uq2ZlLm7OkN2TacsqzR3G/0Vvyin1He3twJkyCTY\nLpiFA1co1k92Su1yAuThwvdF8AQxohjUv5OZMeoku6sgkZDV76Zl6r91NYmKSlCA\nyVSU3U/nAgMBAAECggEAEFF7WEONkRp6GKkRHpwWf1/y7i97ihQIdf180siZVw7X\nllf84Je1Zrf/AY1PNKpbW7Sz1aLuY9dXXhjNqPiJly+rgYnoUtljNNmGno3TplSU\nTtbsFqXvpOFDqdoHBdButtbcUS0KTcbvGRgi2AjciVDwyeAUPic/0ZmUik1radkw\nBpyCGO7h+gpdQA79C5TntN9U/4shdHkhiDsrUAv+f12tqkkfujDCHSGDa/xzQgGB\nRl3dGsxzp6KuOnSZ1VM4rNUhpAbNMFGCUk0oUzhhqbXUWeVSzQKDEgrdpROcoemz\ni2splHIgdMkGKPeypzo5twAP5yinjNzE52WIJHav5QKBgQDtMoSQgSTBqy5MsP6g\nmVTpzO8D3ZP/L3AVkJ4/ZD6Q3FobrMBdh+y2jAgcW6BIr8idX+2ljYnH+Yrj28tB\n8QSjUiw5PslOf+mgxrOQqDrlNrMXS2t1QLzQ+7b7uNXgt0o61FV9//6FLvQoYtR3\nwzigjmf1+pE3yzoB5F1XiojkpQKBgQC7isCHJwE1A/G7wnEXQMyuBwz1Ct1wEX9q\nAfWr95JaSUlSNzlGwKeS+UoUOq8OcBk3oLzCfF1ci1t4LeJtp2ttRPGep9R3ThkI\n+VskduglUq5lSg/2NpXAL2yPTRNphhnUQ2U9EXHqpuTmd4f/BD6lycsq2Fq1DhpS\nDnrGJ7lgmwKBgQDS/XTd9YJ0o4hzv50/ziSyNBEIJzlWbSQOiq25RbpBsUCWDXyv\nthDh8H3me7p/7Z1OH96MvPIqZ9ccCI8tAO9XN+kOosL+iNmQoi9oJbz910JHHldf\n3U4Xt1B1aV0WnvPwkJ/bjLMiVTnqEr9cKNNePk5Lh69VKflXZYOCM0DB4QKBgGjO\njPO6z4jiMGi+rFbTZs9mr04OCVxE2xDSEYpOK+L7C9e/duncZonTeRu/A++so9sb\noAGMYNyEINUTx3OCWZ3SJrmEj08xPPpv6AiDzw50m3ONpUfyj1O87Q1UhKG3SJ4A\nIAa1xhTduhQ1/rF8nMon8Lt7940xWXI8F07ACnA7AoGAN7FnsNCgz6Iri2A3Mn3F\nYThGw/BTIbI98wJ5qgz/5ET6rhfi4koR47/E9kWIXWeg++WepzKkWQTaY1ALm3xE\npKdQxiD6333yrGOU+JzOhnHKm0Uub/xDlsq8wt4jDeTtfKh6myhxFVGa8kVHt1zP\n/axu5axubaOfKGG5Q+sEH5M=\n-----END PRIVATE KEY-----\n
+AUTH_CLIENT_EMAIL=firebase-adminsdk-cywnq@chupito-c5p5t.iam.gserviceaccount.com
+AUTH_CLIENT_ID=101786314960472680632
+AUTH_CLIENT_CERT_URL=https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-cywnq%40chupito-c5p5t.iam.gserviceaccount.com
+AUTH_API_KEY=AIzaSyArsC-1LYGtJQ4pdImCbH5mirFd5VmXaPU
+AUTH_DOMAIN=chupito-c5p5t.firebaseapp.com
+AUTH_PROJECT_ID=chupito-c5p5t
+AUTH_STORAGE_BUCKET=chupito-c5p5t.appspot.com
+AUTH_MESSAGING_SENDER_ID=59947976000
+AUTH_APP_ID=1:59947976000:web:ca037070787d69365d26a5
+AUTH_MEASUREMENT_ID=G-CSCJBCQ57V
+TEST_USER_EMAIL = testuser@chupito.com
+TEST_USER_PWD = 'TesT#975'
+TEST_USER_ID=sRrmUhxMgrhA1WeMyQp9CzzxyO92
+ADMIN_USER_EMAIL=adminuser@chupito.com
+ADMIN_USER_PWD = 'Admin#975'
+ADMIN_USER_ID=2qWPHHeRY9b3ouN8deae8GkCUnx1
+```
+nvm use v18.16.0
+
+construir base de datos: node scripts/db-migration.js
+
+yarn dev
