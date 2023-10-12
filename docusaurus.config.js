@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Event App Portal',
-  tagline: 'Documentación de proyecto Chupito',
+  title: 'Developer Portal',
+  tagline: 'Documentación de arquitectura y catálogo de APIs',
   url: 'https://client-url.com/',
   baseUrl: '/documentation',
   onBrokenLinks: 'throw', // WARNING: Please don't change/remove it. It could throw consistency/deployment issues 
@@ -36,13 +36,13 @@ const config = {
       {
         applicationDocs: {
           sidebarPath: require.resolve('./docs/application/sidebars.js'),
-          editUrl: "https://repo-remote-url/gestion-digital/development/documentation/edit/main",
+          editUrl: "https://client-url.com/development/documentation/edit/main",
           path: 'docs/application',
           routeBasePath: 'application',
         },
         apis: {
           sidebarPath: require.resolve('./api-catalog/sidebars.js'),
-          editUrl: "https://repo-remote-url/gestion-digital/development/documentation/edit/main",
+          editUrl: "https://client-url.com/development/documentation/edit/main",
           path: 'api-catalog',
           routeBasePath: 'api-catalog',
           docItemComponent: "@theme/ApiItem"
@@ -77,7 +77,7 @@ const config = {
   themeConfig:
     ({
       navbar: {
-        title: 'Chupito-Event app',
+        title: 'Programa de lealtad',
         logo: {
           alt: 'Mck Logo',
           src: 'img/mck-logo.png',
@@ -117,7 +117,7 @@ const config = {
             items: [
               {
                 label: 'Git',
-                href: 'https://repo-remote-url/gestion-digital/documentation',
+                href: 'https://client-url.com/documentation',
               }
             ],
           },

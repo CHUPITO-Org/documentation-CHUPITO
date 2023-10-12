@@ -1,0 +1,112 @@
+openapi: 3.0.0
+info:
+  title: Users API
+  description: API chupitos
+  version: 1.0.0
+servers:
+  - url: "http://localhost:5002"
+    description: localhost url
+
+tags:
+- name: users
+  description: When a customer decides to redeem a specific points, they initiate the redemption process.
+  x-displayName: users
+x-tagGroups:
+- firstName: users
+  tags:
+    - users
+
+
+paths:
+  /v1/users:
+    get:
+      summary: Retrieves events with registration status
+      tags: 
+        - users
+      responses:
+        200:
+          description: return all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Users"
+
+  /v1/users/event/{eventId}:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Retrieves registration status for an event
+      tags: 
+        - users
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+          
+          description: the event id
+      responses:
+        200:
+          description: return true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  attendanceConfirmed:
+                    type: boolean
+
+  /v1/users/events:
+    get:
+      security:
+        - bearerAuth: []
+      summary: Retrieves events with registration status
+      tags: 
+        - users
+      responses:
+        200:
+          description: return events array
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    address:
+                      type: string
+                    eventData:
+                      type: string
+                    name:
+                      type: string
+                    status:
+                      type: string
+                    year:
+                      type: string
+                    subscribed:
+                      type: boolean
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Users:
+      type: object
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        isAdmin:
+          type: boolean
+        isSuperAdmin:
+          type: boolean
+        role:
+          type: string
+        uid:
+          type: string

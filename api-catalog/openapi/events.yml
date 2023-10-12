@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: Events API
+  description: API chupitos
+  version: 1.0.0
+servers:
+  - url: "http://localhost:5002"
+    description: localhost url
+
+tags:
+- name: events
+  description: When a customer decides to redeem a specific points, they initiate the redemption process.
+  x-displayName: events
+x-tagGroups:
+- firstName: events
+  tags:
+    - events
+
+
+paths:
+  /v1/events:
+    get:
+      summary: return all events
+      tags: 
+        - events
+      responses:
+        "200":
+          description: return an array with all events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EventsResponse"
+  
+  
+  /v1/events/{eventId}:
+    get:
+      summary: return an event according to an id
+      tags: 
+        - events
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: the event id
+      responses:
+        200:
+          description: return event
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/EventsResponse"
+        404:
+          description: Event not found
+    put:
+      security:
+        - bearerAuth: []
+      summary: add a user in an specific event
+      tags: 
+        - events
+      parameters:
+        - name: eventId
+          in: path
+          schema:
+            type: string
+          required: true
+          description: the event id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                attendees:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+      responses:
+        "200":
+          description: return an array with all events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EventsResponse"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    EventsResponse:
+      type: object
+      properties:
+        address:
+          type: string
+        eventData:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+        year:
+          type: string
+      required:
+        - name
+        - status
+        - evenData
+        - year
+        - address
