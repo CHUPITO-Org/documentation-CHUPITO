@@ -3,13 +3,11 @@ sidebar_position: 3
 ---
 import NumberBullet from '@site/src/components/NumberBullet';
 
-# Programa de redención de puntos
+# API listar eventos
 
-## ¿Qué es redención de puntos?
-La redención de puntos o canje es una forma de recompensa que se otorga a los miembros de un programa de lealtad por su fidelidad y compromiso con nuestra empresa de alquiler de autos.
-Una vez que los miembros han acumulado suficientes puntos, pueden canjearlos por el alquiler gratuito de autos o descuentos. 
+## API: Listar eventos
 
-El valor de los puntos de canje puede variar según el plan: Basic, Premium o Gold.
+ [APIs Listar eventos link](#./api-catalog/docs/post-onhold-redemption)
 
 ## API: Reservar puntos
 

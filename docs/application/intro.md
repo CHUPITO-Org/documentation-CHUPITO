@@ -4,6 +4,7 @@ sidebar_position: 1
 
 # Intro
 
-La documentación adecuada de los procesos es importante porque permite tener un registro detallado de las actividades realizadas en un proyecto, lo que facilita la identificación de errores y la toma de decisiones informadas. 
-Para lograr una documentación efectiva, es necesario seguir convenciones sobre los entregables que se generan a partir de cada proyecto. En este sentido, se ha determinado que tanto las APIs como los journeys deben contar con sus diagramas de secuencia, como parte de un esfuerzo coordinado entre las distintas áreas. Para elaborar estos diagramas, se utiliza la herramienta Mermaid, que permite crear diagramas de flujo, diagramas de secuencia y otros tipos de diagramas de manera sencilla y legible. 
-Con una adecuada documentación y el uso de herramientas como Mermaid, se puede mejorar la eficiencia y la calidad de los proyectos.
+Esta documentación se ha concebido con un propósito claro: proporcionar un registro exhaustivo de cada una de las operaciones que conforman la funcionalidad de la aplicación. 
+Aquí, los usuarios encontrarán una descripción detallada de los flujos de trabajo que rodean a cada uno de los puntos de acceso (endpoints) que conforman la aplicación. 
+
+Además, se ofrece una sección específica que ofrece una guía a nivel técnico sobre cómo consumir cada endpoint y qué respuestas se pueden esperar en el proceso.

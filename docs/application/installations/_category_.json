@@ -1,0 +1,8 @@
+{
+  "label": "Instalaciones",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Instalaciones requeridas en el proyecto"
+  }
+}

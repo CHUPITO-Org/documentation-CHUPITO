@@ -77,11 +77,10 @@ const config = {
   themeConfig:
     ({
       navbar: {
-        title: 'Programa de lealtad',
         logo: {
           alt: 'Mck Logo',
-          src: 'img/mck-logo.png',
-          srcDark: 'img/mck-logo.png',
+          src: 'img/chupito-logo.svg',
+          srcDark: 'chupito-logo.svg',
         },
         items: [
           {
