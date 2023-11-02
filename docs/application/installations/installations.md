@@ -4,14 +4,16 @@ sidebar_position: 1
 
 # Instalaciones
 
-
-
-
 ## Frontend-conference
 
-Instalar paquetes : yarn
+Para correr el frontend, se necesitan los siguientes pasos:
 
-Agregar file .env
+1. Clonar el repositorio: git clone urlRepositorio
+
+2. Instalar paquetes : yarn
+
+3. Agregar file .env
+
 ```
 REACT_APP_BASE_PATH=http://localhost:5002/v1/
 REACT_APP_VERSION=1.2.6
@@ -25,16 +27,23 @@ TEST_USER_EMAIL=testuser@chupito.com
 TEST_USER_PWD=TesT#975
 TEST_USER_ID=sRrmUhxMgrhA1WeMyQp9CzzxyO92
 ```
-Usar version node v14
 
+4. Usar version node v14
 
+5. Correr la aplicación: yarn start
 
 ### Backend-chlorine
 
-docker-compose up -d
-yarn install
+Para correr el backend, se necesitan los siguientes pasos:
 
-Agregar file .env
+1. Clonar el repositorio: git clone urlRepositorio
+
+2. Intalar las dependencias: yarn install
+
+3. Correr la imagen de la base de datos mongo: docker-compose up -d
+
+4. Agregar file .env
+
 ```
 PRIVATE_KEY_ID=db7e1f20c83c09eee42aa4c81bf7d002e6b8aa87
 PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkHJyFx/d8dIBn\nmy/J8ff/gEGbog855UiunbFo4nb7ckT03WJKMPelfgQQDFaDyBf7MH4qfyVwLRe8\nsj+e9XymGWucR65ALxW8toawd9o7um8eJZLcC2FoDv937yzzreox76S7B1bTRlen\noub7/Z/nV9pWSWR9baahCrDfb6kDa4bUEHV0eImdfF6rhUq/Vq65O6n0ERNj3uIw\nCdOo+xXsuoTuZVx8IoVHC1i20qNuQREzhtij502hHYhTzMqxfDBIR5P/KD8nKBNW\nctGdzHEG8JHcc71C2f6k5Y5u/XP9ZlYtH2zLjtHU5MFOQazDqhkJbdFnyQMQBYma\nHz8MufTHAgMBAAECggEAQGtgv5zyl35txv2iQS3D0R4J4us2+d14bd7FvKuk0+gT\njGD4i7H0DBjOxHPrY/hf/YCYDdtyGToCJtZ7ZczsPJEe7i4vBs/UwwqNDWlGl4qD\nwrwyDUFEX6H/gxc2OIMsuqRcr/PeD7n9f3bRH9p7ccbJFHTjxt6LeYymSFbe69Gg\nvW1yyFxCelQQDW1NQ7x2TtKsLycFgjJKmpsdFsIpRoemZi+H1LwbxMo9lE82L76n\nguaYoQaEGPFN+3q7dqohwlVGw0nubPt8ZhZuptIOnck7yH+A3uUBV2F482oxO9o5\nJio0b9PEjV5GvYjzr23NGHitZQd3bdAlzWOCaJlvZQKBgQDcBSz1br+7cx4hQTVJ\nU+OBHbnda334LAq83SQLLJEBioo9P9zqtgogLcsa1AUDEFhbpu5GGj+hpCJjj3sk\nFQLCbEgNuRJec6cug5FaSHDMY2pj+pP45JSS2LVb1+p/bRRs07PrpvX+2sDU2qxz\nUT9LdO/zL7mAMuprangGlbReAwKBgQC+8ukCzuAW4M7vAn93SVmNp1vvPDEo7b5v\nKbFCObgFrcD/C2S5cJhVKvGxcGBTyaW+sZ5QYDd3NlxXxiNMcwL7BxTiQxzzb2nF\n+/S/zPbsKikdYYKwjm+xBj2UJeMyrcVhZFU5AZtA4IH4tAzJO7XlCY4YRv0ht5bO\nLtgT/Nek7QKBgDMQGHEVtPXiL7n0ElPkXkaXCY3z5pZ0UkGm6TiWrUi4SIESk0j9\n2rfBKQQe9NLTNk5/HYmzidUP7NNCd4fWQH+y9b4Jl9PH76MB8fgMG/GzmPt/Klx3\nYGv8U4rvP4M3Y6gmMfmdFDaDuoEsBx30W0Y963p7NwgjyPgJC7YrhGLVAoGAc8No\nqJ8rFDOuwRBOns8FT+/KuLtRQnMAJPytzmyXuDmi6/zIT/SHJfsnFGAAxktWBMpC\nJJBwkAGQ8lXZSJvhjra4XoQ5pQxCoBkkRLPKb1sQGhPn24o/BJ+37X0axLq9E1J0\nqF7k9OwnX9QofEeK+xRT5TwEctCOyOl1boi3Y/ECgYEAimr8FpKx4e671oBh2MOt\no8S1rBMvkkhQwmND0/cZajo38oIIQgzMNDQJmJU+IcKz6GUfK93VYZGRYwShOQBI\nqBwqCeKIgCLrdg1Cc/Ncd9zQtBuZ7IiV0ys+5s/auBUcsz3cX186pILtKK71aEzF\nqCMBWZhCByWZxb0aRHUjSdU=\n-----END PRIVATE KEY-----\n
@@ -68,8 +77,9 @@ ADMIN_USER_EMAIL=adminuser@chupito.com
 ADMIN_USER_PWD = 'Admin#975'
 ADMIN_USER_ID=2qWPHHeRY9b3ouN8deae8GkCUnx1
 ```
-nvm use v18.16.0
 
-construir base de datos: node scripts/db-migration.js
+5. Configurar la versión de node: nvm use v18.16.0
 
-yarn dev
+6. Construir base de datos, si aún no se ha hecho la migración: node scripts/db-migration.js (opcional)
+
+7. Corre la aplicación: yarn dev

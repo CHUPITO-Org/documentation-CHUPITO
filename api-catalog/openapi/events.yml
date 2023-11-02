@@ -8,20 +8,19 @@ servers:
     description: localhost url
 
 tags:
-- name: events
-  description: When a customer decides to redeem a specific points, they initiate the redemption process.
-  x-displayName: events
+  - name: events
+    description: When a customer decides to redeem a specific points, they initiate the redemption process.
+    x-displayName: events
 x-tagGroups:
-- firstName: events
-  tags:
-    - events
-
+  - firstName: events
+    tags:
+      - events
 
 paths:
   /v1/events:
     get:
-      summary: return all events
-      tags: 
+      summary: Return all events
+      tags:
         - events
       responses:
         "200":
@@ -32,12 +31,75 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/EventsResponse"
-  
-  
+        "500":
+          description: error given when an unexpected condition was encountered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                internal_server_error:
+                  value:
+                    status: 500
+                    message: Internal server error
+    post:
+      summary: Create a new event
+      tags:
+        - events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "#/components/schemas/EventsResponse"
+      responses:
+        "200":
+          description: Return a new event
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EventsResponse"
+        "401":
+          description: error given when the user is not logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                unauthorized:
+                  value:
+                    status: 401
+                    message: Unauthorized
+        "422":
+          description: error given when some parameter is wrong
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                unprocessable_entity:
+                  value:
+                    status: 422
+                    message: Unprocessable Entity
+        "500":
+          description: error given when an unexpected condition was encountered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                internal_server_error:
+                  value:
+                    status: 500
+                    message: Internal server error
+
   /v1/events/{eventId}:
     get:
-      summary: return an event according to an id
-      tags: 
+      summary: Return event with Id
+      tags:
         - events
       parameters:
         - name: eventId
@@ -47,27 +109,45 @@ paths:
             type: string
           description: the event id
       responses:
-        200:
+        "200":
           description: return event
           content:
             application/json:
               schema:
                 type: object
                 $ref: "#/components/schemas/EventsResponse"
-        404:
-          description: Event not found
+        "404":
+          description: error given when an event does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                event_not_found:
+                  value:
+                    status: 404
+                    message: Event not found
+        "500":
+          description: error given when an unexpected condition was encountered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                internal_server_error:
+                  value:
+                    status: 500
+                    message: Internal server error
     put:
-      security:
-        - bearerAuth: []
-      summary: add a user in an specific event
-      tags: 
+      summary: Update event
+      tags:
         - events
       parameters:
         - name: eventId
           in: path
+          required: true
           schema:
             type: string
-          required: true
           description: the event id
       requestBody:
         required: true
@@ -75,23 +155,60 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
-                attendees:
-                  type: object
-                  properties:
-                    email:
-                      type: string
-                    password:
-                      type: string
+              $ref: "#/components/schemas/EventsResponse"
       responses:
         "200":
-          description: return an array with all events
+          description: Return a new event
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: "#/components/schemas/EventsResponse"
+        "404":
+          description: error given when an event does not exist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                event_not_found:
+                  value:
+                    status: 404
+                    message: Event not found
+        "401":
+          description: error given when the user is not logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                unauthorized:
+                  value:
+                    status: 401
+                    message: Unauthorized
+        "422":
+          description: error given when when some parameter is wrong
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                unprocessable_entity:
+                  value:
+                    status: 422
+                    message: Unprocessable Entity
+        "500":
+          description: error given when an unexpected condition was encountered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                internal_server_error:
+                  value:
+                    status: 500
+                    message: Internal server error
 components:
   securitySchemes:
     bearerAuth:
@@ -117,3 +234,11 @@ components:
         - evenData
         - year
         - address
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: number
+        message:
+          type: string

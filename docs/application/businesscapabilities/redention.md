@@ -1,100 +1,168 @@
 ---
 sidebar_position: 3
 ---
+
 import NumberBullet from '@site/src/components/NumberBullet';
 
-# API listar eventos
+# API eventos
 
-## API: Listar eventos
+## API: listar eventos regitrados
 
- [APIs Listar eventos link](#./api-catalog/docs/post-onhold-redemption)
-
-## API: Reservar puntos
-
-Se ha desarrollado una API denominada "reservar puntos", la cual permite la reserva de puntos que se asocian a la reserva de un auto y que posteriormente podrán ser canjeados. [APIs Reservar puntos link](#./api-catalog/docs/post-onhold-redemption)
-
-```mermaid
-sequenceDiagram
-    autonumber
-  
-    participant Back-end as BFF
-    participant Loyalty-Api
-    participant Core-loyalty
-
-    Back-end->>+Loyalty-Api: Put on-hold points
-
-    break User not Found
-        Loyalty-Api-->>Back-end: Result
-    end
-    
-    break transactionId already exist 
-        Loyalty-Api-->>Back-end: Result
-    end
-
-    break format error
-        Loyalty-Api-->>Back-end: Result
-    end
-    Loyalty-Api->Loyalty-Api: Applied bussiness logical 
-    Loyalty-Api->>+Core-loyalty: Applied on-hold
-    Core-loyalty->>Loyalty-Api: Success
-    Loyalty-Api->>Back-end: Success
-```
-   <NumberBullet number='1'> Back-end recibirá la solicitud para reservar puntos del cliente asociadio a una transación de una reserva </NumberBullet> 
-   * el servicios realizara validaciones de formato y valores aceptados en el request
-   <NumberBullet number='2'> Si el customer.id del request no es válido, retornará error 404 </NumberBullet> 
-   <NumberBullet number='3'> Si el transactionId ya fue procesado anteriormente, retornará error 400</NumberBullet> 
-   <NumberBullet number='4'> Si onHold.TotalCashes menor o igual a onHold.TotalCashWithPoints, retornará error 400</NumberBullet> 
-   <NumberBullet number='5'> Loyalty-Api aplicará la logica de selecion de plan antes de enviar solicitud al core-loyalty </NumberBullet>
-   <NumberBullet number='6'> Loyalty-Api aplicará la solicitud de puntos de canje a Core-loyalty </NumberBullet>
-   <NumberBullet number='7'> Core-loyalty retornará reserva con éxito a Loyalty-Api </NumberBullet>
-   <NumberBullet number='8'> Loyalty-Api retornará reserva con éxito a Back-end </NumberBullet>
-   
-
-* Retornará el `id` assignado para esta reserva de puntos
-
-## API: Redención de puntos
-
-El API de redención de puntos hace efectiva el canje de puntos o hace un rollback de la transación dependiendo de `applyRedemption` recibido en el request. [API aplicar redemción link](#./api-catalog/docs/postoffhold-redemption)
-
+Permitirá al usuario obtener los eventos que han sido regitrados
 
 ```mermaid
 sequenceDiagram
     autonumber
 
-    participant Back-end
-    participant Loyalty-Api
-    participant Core-loyalty
+    actor CONSUMER as Consumer
+    participant BE-CHUPITO
+    participant mongoDB
 
-    Back-end->>+Loyalty-Api: send request
+    CONSUMER->>+BE-CHUPITO: Do the request
 
-    break Bad request
-        Loyalty-Api-->>Back-end: Result
+    BE-CHUPITO->>+mongoDB: GET find()
+
+    break error
+        mongoDB->>+BE-CHUPITO: Internal server error
     end
-    
-    break hold.id does not found 
-        Loyalty-Api-->>Back-end: Result
-    end
-
-
-    Loyalty-Api->>+Core-loyalty: Applied off-hold
-    Core-loyalty->>Loyalty-Api: Success
-    Loyalty-Api->>Back-end: Success
+    mongoDB->>+BE-CHUPITO: Successful response
 ```
-   <NumberBullet number='1'> Back-end recibirá la solicitud de redención con dos parametros: </NumberBullet> 
 
-- ***id*** : id asignado a la reserva de los puntos
-- ***applyRedemption*** : true cuando se quiere aplicar la redención. False cuando no se quiere aplicar la redención. 
+<NumberBullet number='1'> Se hace la petición a mongo DB para obtener los eventos registrados</NumberBullet>
 
-:::warning
-Tenga en cuenta que si decide dar rollback a la reserva, se aplicara una penalización al cliente según la politica asignada
-:::
-   
-   <NumberBullet number='2'> Si el formato del request no es válido, retornará error 400 </NumberBullet> 
-   <NumberBullet number='3'> Si el hold.id del request no se encuentra o no es válido, retornará error 404</NumberBullet> 
-   <NumberBullet number='5'> Loyalty-Api aplicará la redención de puntos de canje a Core-loyalty </NumberBullet>
+- El servicios hace validaciones de formato y valores aceptados en el request
 
-*   Cuando se aplica la derención, se descongelarán los puntos reservados y se descontararán del blaance general del cliente
-*   Cuando no se aplica la redención, se retornan los puntos congenlados al balance general del cliente resptando los puntos por penalidad según la politica.  
+<NumberBullet number='2'> Si existe algún error en el endpoint, retornará error 500 </NumberBullet>
+<NumberBullet number='3'>Restornará 200 si se obtuvo la lista de eventos con éxito </NumberBullet>
 
-   <NumberBullet number='6'> Core-loyalty retornará rendención con éxito a Loyalty-Api </NumberBullet>
-   <NumberBullet number='7'> Loyalty-Api retornará redención con éxito a Back-end </NumberBullet>
+- Si exite data, retornará una lista con los eventos registrados, de lo contrario retornará una lista vacía
+
+## API: Obtener evento por Id
+
+Permitirá al usuario obtener el evento al que le pertence el Id que es pasado por paramentro
+
+```mermaid
+sequenceDiagram
+    autonumber
+
+    actor CONSUMER as Consumer
+    participant BE-CHUPITO
+    participant mongoDB
+
+    CONSUMER->>+BE-CHUPITO: Do the request
+
+    BE-CHUPITO->>+BE-CHUPITO: GET findByIdFromMongo(id)
+
+    BE-CHUPITO->>+mongoDB: GET findOne(id)
+
+    break error
+        mongoDB->>+BE-CHUPITO: Event not found
+    end
+
+    break error
+        mongoDB->>+BE-CHUPITO: Internal server error
+    end
+
+    mongoDB->>+BE-CHUPITO: Successful response
+```
+
+<NumberBullet number='1'> La aplicación realizará el llamado al método para obtener el evento de acuerdo a un parametro: </NumberBullet>
+
+- **_id_** : id que le pertenece al evento
+
+<NumberBullet number='2'> MongoDB recibe la petición </NumberBullet>
+<NumberBullet number='3'> Si el evento no existe, retornará error 404</NumberBullet>
+<NumberBullet number='3'> Si existe error en el endpoint, retornará error 500</NumberBullet>
+<NumberBullet number='4'>Se retornará 200 si encuentra el evento con el Id indicado</NumberBullet>
+
+- Retorna el evento con el Id que se paso por parámetro
+
+## API: Actualizar evento
+
+Permitirá al usuario actualizar el evento al que le pertenece el Id enviado por parametro
+
+```mermaid
+sequenceDiagram
+    autonumber
+
+    actor CONSUMER as Consumer
+    participant BE-CHUPITO
+    participant mongoDB
+
+    CONSUMER->>+BE-CHUPITO: Do the request
+
+    BE-CHUPITO->>+mongoDB: PUT findOneAndUpdate(id, data)
+
+    break error
+        mongoDB->>+BE-CHUPITO: Unauthorized
+    end
+
+    break error
+        mongoDB->>+BE-CHUPITO: Event not found
+    end
+
+    break error
+        mongoDB->>+BE-CHUPITO: Internal server error
+    end
+
+    break error
+        mongoDB->>+BE-CHUPITO: Unprocessable Entity
+    end
+
+    mongoDB->>+BE-CHUPITO: Successful response
+```
+
+<NumberBullet number='1'> MongoDB recibirá la petición con dos parametro: </NumberBullet>
+
+- **_id_** : id que le pertenece al evento
+- **_data_** : data con la que se actualiza el evento
+
+<NumberBullet number='2'> Si el usuario no esta logueado como admin, retornará error 401 </NumberBullet>
+<NumberBullet number='3'> Si el evento no exist, retornará error 404</NumberBullet>
+<NumberBullet number='4'>Si existe un error en el endpoint, restornará 500</NumberBullet>
+<NumberBullet number='5'> Si algún atributo esta mal escrito, retornará error 422</NumberBullet>
+<NumberBullet number='6'>Se retornará 200 si se actualiza el evento con el Id indicado</NumberBullet>
+
+- Retornará el evento con la información actualizada
+
+## API: Crear evento
+
+Permitirá al usuario crear un evento
+
+```mermaid
+sequenceDiagram
+    autonumber
+
+    actor CONSUMER as Consumer
+    participant BE-CHUPITO
+    participant mongoDB
+
+    CONSUMER->>+BE-CHUPITO: Do the request
+
+    BE-CHUPITO->>+mongoDB: POST create(data)
+
+    break error
+        mongoDB->>+BE-CHUPITO: Unauthorized
+    end
+
+    break error
+        mongoDB->>+BE-CHUPITO: Unprocessable Entity
+    end
+
+    break error
+        mongoDB->>+BE-CHUPITO: Internal server error
+    end
+
+    mongoDB->>+BE-CHUPITO: Successful response
+```
+
+<NumberBullet number='1'> Se realizará la petición con un parametro: </NumberBullet>
+
+- **_data_** : data para el evento a crear
+
+<NumberBullet number='2'> Si el usuario no esta logueado como admin, retornará error 401 </NumberBullet>
+<NumberBullet number='3'> Si algún atributo esta mal escrito, retornará error 422</NumberBullet>
+<NumberBullet number='4'>Si existe un error en el endpoint, restornará 500</NumberBullet>
+<NumberBullet number='5'>Se retornará 201 si el evento fue creado correctamente</NumberBullet>
+
+- Retornará el evento creado

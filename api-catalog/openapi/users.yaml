@@ -8,23 +8,22 @@ servers:
     description: localhost url
 
 tags:
-- name: users
-  description: When a customer decides to redeem a specific points, they initiate the redemption process.
-  x-displayName: users
+  - name: users
+    description: When a customer decides to redeem a specific points, they initiate the redemption process.
+    x-displayName: users
 x-tagGroups:
-- firstName: users
-  tags:
-    - users
-
+  - firstName: users
+    tags:
+      - users
 
 paths:
   /v1/users:
     get:
       summary: Retrieves events with registration status
-      tags: 
+      tags:
         - users
       responses:
-        200:
+        "200":
           description: return all users
           content:
             application/json:
@@ -32,61 +31,71 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Users"
-
-  /v1/users/event/{eventId}:
-    get:
-      security:
-        - bearerAuth: []
-      summary: Retrieves registration status for an event
-      tags: 
-        - users
-      parameters:
-        - name: eventId
-          in: path
-          required: true
-          schema:
-            type: string
-          
-          description: the event id
-      responses:
-        200:
-          description: return true
+        "500":
+          description: error given when an unexpected condition was encountered
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  attendanceConfirmed:
-                    type: boolean
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                internal_server_error:
+                  value:
+                    status: 500
+                    message: Internal server error
 
-  /v1/users/events:
-    get:
-      security:
-        - bearerAuth: []
-      summary: Retrieves events with registration status
-      tags: 
+    post:
+      summary: Create a new user
+      tags:
         - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              $ref: "#/components/schemas/Users"
       responses:
-        200:
-          description: return events array
+        "200":
+          description: Return a new user
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  properties:
-                    address:
-                      type: string
-                    eventData:
-                      type: string
-                    name:
-                      type: string
-                    status:
-                      type: string
-                    year:
-                      type: string
-                    subscribed:
-                      type: boolean
+                  $ref: "#/components/schemas/Users"
+        "401":
+          description: error given when the user is not logged in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                unauthorized:
+                  value:
+                    status: 401
+                    message: Unauthorized
+        "422":
+          description: error given when some parameter is wrong
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                unprocessable_entity:
+                  value:
+                    status: 422
+                    message: Unprocessable Entity
+        "500":
+          description: error given when an unexpected condition was encountered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                internal_server_error:
+                  value:
+                    status: 500
+                    message: Internal server error
 components:
   securitySchemes:
     bearerAuth:
@@ -109,4 +118,11 @@ components:
         role:
           type: string
         uid:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: number
+        message:
           type: string
